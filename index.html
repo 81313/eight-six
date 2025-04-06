@@ -1,43 +1,155 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scal">
-        <title>html 練習</title>
-        <style>
-            body {
-                margin: 0;
-            }
-        </style>
-    </head>
-    <body>
-        <div style="
-            background-color: #f1f1f1;
-            text-align: center;
-            padding: 30px;
-            ">
-            <img src="https://pbs.twimg.com/profile_images/1832106439109644288/eLNSdz78_400x400.jpg" alt="pool loop" width="150px" height="150px">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex 布局</title>
+    <style>
+        body{
+            margin: 0;
+            height: 100vh;
+            background-color: #eee;
+        }
+        /* *{
+            border: 1px solid black;
+        }*/
+        .yinying{
+            box-shadow: rgb(0 0 0/20%) 0px 2px 1px -1px,
+            rgb(0 0 0/14%) 0px 1px 1px 0px,rgb(0 0 0/12%) 0px 1px 3px 0px;
+        }
+        .flex{
+            display: flex;
+        }
+        .baiSe{
+            background-color: white;
+        }
+        .flex1{
+            flex: 1;
+        }
+        .column{
+            flex-direction: column;
+        }
+        .mg8{
+            margin: 8px;
+        }
+        .mgr8{
+            margin-right: 8px;
+        }
+        .mgt8{
+            margin-top: 8px;
+        }
+        .daoHang{
+            padding: 10px 20px;
+            border-bottom: 2px solid gray;
+            font-size: 20px;
+            color: blue;
+        }
+        .parent{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="flex">
+    <!--側邊攔-->
+    <div style="width: 200px; z-index: 2;" class="baiSe yinying">
+        <!--頭像欄-->
+        <div
+            style="
+                padding: 10px;
+                align-items: center;
+                justify-content: center;
+                border-bottom: 1px solid #999;
+                "
+            class="flex"
+        >
+            <img
+                src="https://pbs.twimg.com/profile_images/1832106439109644288/eLNSdz78_400x400.jpg"
+                alt=""
+                width="40px"
+                height="40px"
+            />
+            <div style="margin-left: 10px;">POOL loop</div>
         </div>
-        <div style="
-            max-width: 760px;
-            margin: 30px auto;
-            padding: 15px;
-            line-height: 1.7;
-            ">
-            <p>我堆的爹</p>
-            <p>我堆的爹</p>
-            <p>我堆的爹</p>
-            <p>我堆的爹</p>
-            <p>我堆的爹</p>
+        <!--導航欄-->
+        <div class="flex1">
+            <div 
+                style="
+                padding: 10px;
+                "
+                class="parent"
+            >傳送門</div>
+            <a class="daoHang parent" href="https://www.youtube.com/@PoolLoopMusic">
+                <img
+                    src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
+                    alt="youtube"
+                    width="40px"
+                    height="40px"
+                >
+                <div style="margin-left: 10px;">Youtube</div>
+            </a>
+            <a class="daoHang parent" href="https://x.com/PoolLoopMusic">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/b/b7/X_logo.jpg"
+                    alt="X"
+                    width="40px"
+                    height="40px"
+                >
+                <div style="margin-left: 10px;">X</div>
+            </a>
+            <a class="daoHang parent" href="https://www.twitch.tv/poolloop0808">
+                <img
+                    src="https://img.freepik.com/premium-vector/twitch-logo_578229-259.jpg"
+                    alt="twitch"
+                    width="40px"
+                    height="40px"
+                >
+                <div style="margin-left: 10px;">Twitch</div>
+            </a>
+            <a class="daoHang parent" href="https://www.instagram.com/poolloop_music/">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png"
+                    alt="ig"
+                    width="40px"
+                    height="40px"
+                >
+                <div style="margin-left: 10px;">Instagram</div>
+            </a>
         </div>
-        <div style="
-        background-color: #f1f1f1;
-        text-align: center;
-        padding: 40px;
-        font-size: 12px;
-        ">
-          <p>我推的網站</p>
-          <a href="https://www.youtube.com/@PoolLoopMusic"> 傳送門</a>
+    </div>
+    <!--主區域-->
+    <div class="flex1 flex column">
+        <!--頭部欄-->
+        <div style="height: 60px; z-index: 1;" class="baiSe yinying"></div>
+        <!--內容區-->
+        <div style="overflow: auto;" class="flex1 flex">
+            <!--左區-->
+            <div style="flex: 3;" class="flex column mg8">
+                <!--數據區-->
+                <div class="flex">
+                    <!--數據塊-->
+                    <div style="height: 100px;" class="flex1 baiSe mgr8 yinying"></div>
+                    <div style="height: 100px;" class="flex1 baiSe mgr8 yinying"></div>
+                    <div style="height: 100px;" class="flex1 baiSe mgr8 yinying"></div>
+                    <div style="height: 100px;" class="flex1 baiSe yinying"></div>
+                </div>
+                <!--列表區-->
+                <div class="flex column">
+                    <!--列表項-->
+                    <div style="height: 160px;" class="baiSe mgt8 yinying"></div>
+                    <div style="height: 160px;" class="baiSe mgt8 yinying"></div>
+                    <div style="height: 160px;" class="baiSe mgt8 yinying"></div>
+                </div>
+            </div>
+            <!--右區-->
+            <div style="flex: 1;" class="flex column mgr8 mgt8">
+                <!--提示區-->
+                <div style="height: 150px;" class="baiSe yinying"></div>
+                <!--消息區-->
+                <div style="height: 300px;" class="baiSe mgt8 yinying"></div>
+            </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
