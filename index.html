@@ -1,155 +1,255 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flex 布局</title>
-    <style>
-        body{
-            margin: 0;
-            height: 100vh;
-            background-color: #eee;
-        }
-        /* *{
-            border: 1px solid black;
-        }*/
-        .yinying{
-            box-shadow: rgb(0 0 0/20%) 0px 2px 1px -1px,
-            rgb(0 0 0/14%) 0px 1px 1px 0px,rgb(0 0 0/12%) 0px 1px 3px 0px;
-        }
-        .flex{
-            display: flex;
-        }
-        .baiSe{
-            background-color: white;
-        }
-        .flex1{
-            flex: 1;
-        }
-        .column{
-            flex-direction: column;
-        }
-        .mg8{
-            margin: 8px;
-        }
-        .mgr8{
-            margin-right: 8px;
-        }
-        .mgt8{
-            margin-top: 8px;
-        }
-        .daoHang{
-            padding: 10px 20px;
-            border-bottom: 2px solid gray;
-            font-size: 20px;
-            color: blue;
-        }
-        .parent{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>忠實的AI助手</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+    }
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 200px;
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      transition: width 0.3s;
+      overflow: hidden;
+    }
+    .sidebar.collapsed {
+      width: 60px;
+    }
+    .sidebar .toggle-btn {
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    .sidebar h3,
+    .sidebar ul,
+    .sidebar button:not(.toggle-btn) {
+      transition: opacity 0.3s;
+    }
+    .sidebar.collapsed h3,
+    .sidebar.collapsed ul,
+    .sidebar.collapsed button:not(.toggle-btn) {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .sidebar ul li {
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .sidebar ul li:hover {
+      text-decoration: underline;
+    }
+    .sidebar button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .main {
+      flex: 1;
+      padding: 30px;
+      background-color: white;
+      position: relative;
+    }
+    .ip-display {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 14px;
+      color: #666;
+    }
+    .content-section {
+      display: none;
+    }
+    .content-section.active {
+      display: block;
+    }
+    .home-message {
+      font-family: "DFKai-SB", "標楷體", serif;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20%;
+    }
+    .chat-container {
+      margin-top: 30px;
+    }
+    .chat-input-area {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .chat-input-area input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      color: #555;
+    }
+    .chat-input-area input::placeholder {
+      color: gray;
+    }
+    .chat-input-area button {
+      padding: 10px 12px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .chat-output {
+      margin-top: 20px;
+      background: #f9f9f9;
+      padding: 10px;
+      border: 1px solid #ccc;
+      min-height: 50px;
+    }
+    .chat-log {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #444;
+    }
+  </style>
 </head>
-<body class="flex">
-    <!--側邊攔-->
-    <div style="width: 200px; z-index: 2;" class="baiSe yinying">
-        <!--頭像欄-->
-        <div
-            style="
-                padding: 10px;
-                align-items: center;
-                justify-content: center;
-                border-bottom: 1px solid #999;
-                "
-            class="flex"
-        >
-            <img
-                src="https://pbs.twimg.com/profile_images/1832106439109644288/eLNSdz78_400x400.jpg"
-                alt=""
-                width="40px"
-                height="40px"
-            />
-            <div style="margin-left: 10px;">POOL loop</div>
-        </div>
-        <!--導航欄-->
-        <div class="flex1">
-            <div 
-                style="
-                padding: 10px;
-                "
-                class="parent"
-            >傳送門</div>
-            <a class="daoHang parent" href="https://www.youtube.com/@PoolLoopMusic">
-                <img
-                    src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
-                    alt="youtube"
-                    width="40px"
-                    height="40px"
-                >
-                <div style="margin-left: 10px;">Youtube</div>
-            </a>
-            <a class="daoHang parent" href="https://x.com/PoolLoopMusic">
-                <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/b/b7/X_logo.jpg"
-                    alt="X"
-                    width="40px"
-                    height="40px"
-                >
-                <div style="margin-left: 10px;">X</div>
-            </a>
-            <a class="daoHang parent" href="https://www.twitch.tv/poolloop0808">
-                <img
-                    src="https://img.freepik.com/premium-vector/twitch-logo_578229-259.jpg"
-                    alt="twitch"
-                    width="40px"
-                    height="40px"
-                >
-                <div style="margin-left: 10px;">Twitch</div>
-            </a>
-            <a class="daoHang parent" href="https://www.instagram.com/poolloop_music/">
-                <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png"
-                    alt="ig"
-                    width="40px"
-                    height="40px"
-                >
-                <div style="margin-left: 10px;">Instagram</div>
-            </a>
-        </div>
+<body>
+  <div class="container">
+    <div class="sidebar" id="sidebar">
+      <button class="toggle-btn" onclick="toggleSidebar()">≡</button>
+      <h3>功能選單</h3>
+      <ul>
+        <li onclick="showSection('home')">1. 首頁</li>
+        <li onclick="showSection('chat')">2. 對話框</li>
+        <li onclick="showSection('team')">3. 人員介紹</li>
+      </ul>
+      <form method="POST" action="login.php">
+        <button type="submit">登入</button>
+      </form>
     </div>
-    <!--主區域-->
-    <div class="flex1 flex column">
-        <!--頭部欄-->
-        <div style="height: 60px; z-index: 1;" class="baiSe yinying"></div>
-        <!--內容區-->
-        <div style="overflow: auto;" class="flex1 flex">
-            <!--左區-->
-            <div style="flex: 3;" class="flex column mg8">
-                <!--數據區-->
-                <div class="flex">
-                    <!--數據塊-->
-                    <div style="height: 100px;" class="flex1 baiSe mgr8 yinying"></div>
-                    <div style="height: 100px;" class="flex1 baiSe mgr8 yinying"></div>
-                    <div style="height: 100px;" class="flex1 baiSe mgr8 yinying"></div>
-                    <div style="height: 100px;" class="flex1 baiSe yinying"></div>
-                </div>
-                <!--列表區-->
-                <div class="flex column">
-                    <!--列表項-->
-                    <div style="height: 160px;" class="baiSe mgt8 yinying"></div>
-                    <div style="height: 160px;" class="baiSe mgt8 yinying"></div>
-                    <div style="height: 160px;" class="baiSe mgt8 yinying"></div>
-                </div>
-            </div>
-            <!--右區-->
-            <div style="flex: 1;" class="flex column mgr8 mgt8">
-                <!--提示區-->
-                <div style="height: 150px;" class="baiSe yinying"></div>
-                <!--消息區-->
-                <div style="height: 300px;" class="baiSe mgt8 yinying"></div>
-            </div>
+
+    <div class="main">
+      <div class="ip-display" id="ipDisplay">你的IP位置是：載入中...</div>
+
+      <div id="home" class="content-section active">
+        <div class="home-message">你好，歡迎使用本系統~</div>
+      </div>
+
+      <div id="chat" class="content-section">
+        <h2>對話框</h2>
+        <div class="chat-container">
+          <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="檔案限制格式：word、csv">
+            <input type="file" id="fileInput" style="display:none;">
+            <button onclick="document.getElementById('fileInput').click()">上傳檔案</button>
+            <button onclick="simulateChat()">送出</button>
+          </div>
+          <div class="chat-output" id="chatOutput"></div>
+          <div class="chat-log" id="chatLog"></div>
         </div>
+      </div>
+
+      <div id="team" class="content-section">
+        <h2>人員介紹</h2>
+      </div>
     </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('collapsed');
+    }
+  
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+    }
+  
+    function getTimeString() {
+      const now = new Date();
+      return now.toLocaleTimeString('zh-TW', { hour12: false });
+    }
+  
+    function simulateChat() {
+      const inputElem = document.getElementById('userInput');
+      const input = inputElem.value.trim();
+      const output = document.getElementById('chatOutput');
+      const log = document.getElementById('chatLog');
+  
+      if (input === '') return;
+  
+      output.textContent = "請稍等...";
+      inputElem.value = ''; // 清空輸入欄
+  
+      setTimeout(() => {
+        output.textContent = "發生錯誤，請重新確認內容";
+        const time = getTimeString();
+        log.innerHTML += `<div>${time} 發生錯誤，請重新確認內容</div>`;
+      }, 500);
+    }
+  
+    document.getElementById('fileInput').addEventListener('change', function () {
+      const file = this.files[0];
+      if (!file) return;
+  
+      const fileName = file.name;
+      const output = document.getElementById('chatOutput');
+      const log = document.getElementById('chatLog');
+      const time = getTimeString();
+  
+      if (fileName.endsWith('.docx') || fileName.endsWith('.csv')) {
+        output.textContent = `${fileName} 上傳成功`;
+        log.innerHTML += `<div>${time} 「${fileName}」 上傳成功</div>`;
+      } else {
+        output.textContent = "發生錯誤，請重新確認內容";
+        log.innerHTML += `<div>${time} 發生錯誤，請重新確認內容</div>`;
+      }
+  
+      this.value = ''; // 清空以便重新上傳相同檔案
+    });
+  
+    // 顯示 IP
+    fetch('https://api.ipify.org?format=json')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('ipDisplay').textContent = '你的IP位置是：' + data.ip;
+      })
+      .catch(() => {
+        document.getElementById('ipDisplay').textContent = '你的IP位置是：取得失敗';
+      });
+  
+    // 監聽鍵盤 Enter 鍵（需兩次連續 Enter 送出）
+    let lastEnterTime = 0;
+    const inputField = document.getElementById('userInput');
+    inputField.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const now = Date.now();
+        if (now - lastEnterTime < 600) {
+          e.preventDefault(); // 阻止換行
+          simulateChat();     // 第二次 Enter 觸發送出
+        }
+        lastEnterTime = now;
+      }
+    });
+  </script>  
 </body>
 </html>
